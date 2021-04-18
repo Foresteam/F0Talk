@@ -37,7 +37,7 @@
 		</v-row>
 	</v-container>
     <v-footer>
-        Created by Foresteam, licensed under GNU GPL v3
+        Created by Foresteam
     </v-footer>
     </div>
 </template>

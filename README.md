@@ -29,7 +29,7 @@ Now you can simply select the desired audio output through the GUI of the app.
 yarn
 ```
 
-#### Debug
+### Debug
 In **dev_wgui**, run:
 ```
 yarn serve
@@ -39,22 +39,22 @@ In **the root of the repository**, run (-g is for GUI):
 yarn start -g
 ```
 
-#### Release
+### Release
 In **dev_wgui**, run:
 ```
 yarn build
 ```
 In **the root of the repository**, run:
 
-For building **for** Linux under Linux:
+For building **for** Linux **under** Linux:
 ```
 yarn build
 ```
-For building **for** Windows:
+For building **for** Windows **under** Linux:
 ```
 yarn build-win
 ```
-For building **for** Windows under Windows:
+For building **for** Windows **under** Windows:
 ```
 yarn winbuild
 ```
