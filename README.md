@@ -3,7 +3,7 @@
 This app is an advanced soundboard, that allows you not just to stream sounds but even to "voice chat" through terminal using GTTS. It can play sounds from a file, or an URL. The URL should be pointing to YouTube.com (MPV requires youtube-dl for this), or it should point to a file directly. Basically, the application may be used just in terminal (launch it without -g) as the GUI is just a shell.
 
 ## Installation
-Download distribution from "releases" section. 
+Download distribution from "releases" section. Install Google Chrome.
 
 #### Windows:
 1. Install VCable https://vb-audio.com/Cable/ 
