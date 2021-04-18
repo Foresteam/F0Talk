@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "audio-speaker": "^1.5.1",
+    "chrome-launcher": "^0.13.4",
+    "express": "^4.17.1",
+    "express-ws": "^4.0.0",
+    "gtts": "^0.2.1",
+    "iohook": "^0.6.6",
+    "open": "^8.0.5",
+    "play-sound": "^1.1.3"
+  },
+  "name": "f0talk",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "bin": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "touch RELEASE && nexe -r wgui -r RELEASE main.js -o dist/linux/F0Talk && rm RELEASE && rm -R dist/linux/node_modules; mkdir -p dist/linux/node_modules/iohook; cp -f -R node_modules/iohook/builds dist/linux/node_modules/iohook",
+    "build-win": "touch RELEASE && nexe -r wgui -r RELEASE -t win32 main.js -o dist/windows/F0Talk.exe && rm RELEASE && rm -R dist/windows/node_modules; mkdir -p dist/windows/node_modules/iohook; cp -f -R node_modules/iohook/builds dist/windows/node_modules/iohook; echo 'start F0Talk.exe -g' > 'dist/windows/F0Talk GUI.bat'",
+    "wbuild": "echo \"\"> RELEASE && nexe -r wgui -r RELEASE main.js -o dist\\windows\\F0Talk && del /f RELEASE && rmdir /s dist\\node_modules && mkdir dist\\windows\\node_modules\\iohook && copy /E /I node_modules\\iohook\\builds dist\\windows\\node_modules\\iohook && echo \"start F0Talk.exe -g\" > \"dist\\windows\\F0Talk GUI.bat\"",
+    "start": "node src/main.js"
+  },
+  "author": "Foresteam",
+  "license": "GPL-3.0-only",
+  "description": ""
+}
