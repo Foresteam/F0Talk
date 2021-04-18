@@ -24,7 +24,7 @@ module.exports = {
     cfg_device: ['Audio output device', 'Устройство выхода звука'],
     cfg_chrome_path: ['Path to Google Chrome. Do not touch this, if GUI opens properly', 'Путь до Google Chrome. Не трогайте, если GUI работает'],
     cfg_async: ['The next sound will bypass the queue', 'Обход очереди проигрывания, один раз'],
-    cfg_lang: ['Interface language. "false" for english, "true" for russian', 'Язык интерфейса. "false" - для английского, а "true" - для русского'],
+    cfg_lang: ['Interface language. "false" for English, "true" for Russian', 'Язык интерфейса. "false" - для английского, а "true" - для русского'],
 
     example: ['Example', 'Пример'],
     add: ['Add', 'Добавить'],
@@ -61,7 +61,7 @@ module.exports = {
         [
             'use "play" to play a sound from file or url',
             '"<lang>" is for TTS (it uses GTTS to say text, language aliases come from Google too)',
-            'the hidden commands "e" (us layout) and "р" (russian layout) are for TTS in english and russian',
+            'the hidden commands "e" (us layout) and "р" (Russian layout) are for TTS in English and Russian',
             '"bind" to bind a command to another command or a command sequence, so you can access it easier',
             '"kbind" to bind a command to a key'
         ],
