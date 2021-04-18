@@ -1,6 +1,6 @@
 const readline = require('readline');
 const { exec } = require('child_process');
-let GTTS;
+let GTTS, fwgui;
 const fs = require('fs');
 const { ArgParser, Command } = require('../cmd-argparse');
 const os = require('os');
@@ -148,7 +148,7 @@ const runCmd = async (raw, _console = true) => {
         _raw = _raw.trim();
         const parsed = argsParser.parse(_raw, commands);
         if (parsed)
-            output = output.concat(await parsed.cmd.execute({ _raw, args: parsed.args, refwith: parsed.refwith }));
+            output = output.concat(await parsed.cmd.execute({ _raw, args: parsed.args, refwith: parsed.refwith }, _console));
     }
     if (!_console)
         return output;
@@ -157,8 +157,9 @@ const runCmd = async (raw, _console = true) => {
             console.log(v);
 };
 
-const main = async (_GTTS, _sound) => {
+const main = async (_GTTS, _sound, _fwgui) => {
     GTTS = _GTTS;
+    fwgui = _fwgui;
     sound = _sound({ player: MPV });
     console.log(`${FgWhite}${loc('welcomeTo')} ${FgBlue}F0Talk${FgWhite}. ${loc('aTool')}.`);
     while (true)
@@ -238,18 +239,22 @@ commands.push(new Command(
         { type: '...string', name: 'cmd' }
     ],
     () => loc('cmd_bind'),
-    async ({text, args}) => {
+    async ({text, args}, doEmit) => {
         shortcuts.self[args.shortcut] = args.cmd.join(' ');
         shortcuts.save();
+        if (doEmit)
+            fwgui.emit('shortcutsChange', shortcuts.self);
     }
 ));
 commands.push(new Command(
     ['unbind'],
     [{ type: 'string', name: 'shortcut' }],
     () => loc('cmd_unbind'),
-    async ({text, args}) => {
+    async ({text, args}, doEmit) => {
         delete shortcuts.self[args.shortcut];
         shortcuts.save();
+        if (doEmit)
+            fwgui.emit('shortcutsChange', shortcuts.self);
     }
 ));
 commands.push(new Command(
@@ -259,11 +264,13 @@ commands.push(new Command(
         { type: '...string', name: 'cmd'}
     ],
     () => loc('cmd_kbind'),
-    async ({args}) => {
+    async ({args}, doEmit) => {
         let keys = args.keys.split('+');
         let ctrlShift = (keys.includes('shift') << 1) + keys.includes('ctrl');
         keyBinds.self[ctrlShift][parseInt(keys[keys.length - 1])] = args.cmd.join(' ');
         keyBinds.save();
+        if (doEmit)
+            fwgui.emit('keyBindsChange', keyBinds.self);
     }
 ));
 commands.push(new Command(
@@ -272,11 +279,13 @@ commands.push(new Command(
         { type: 'string', name: 'keys' },
     ],
     () => loc('cmd_kunbind'),
-    async ({args}) => {
+    async ({args}, doEmit) => {
         let keys = args.keys.split('+');
         let ctrlShift = (keys.includes('shift') << 1) + keys.includes('ctrl');
         delete keyBinds.self[ctrlShift][parseInt(keys[keys.length - 1])];
         keyBinds.save();
+        if (doEmit)
+            fwgui.emit('keyBindsChange', keyBinds.self);
     }
 ));
 commands.push(new Command(
@@ -299,7 +308,7 @@ commands.push(new Command(
         { type: 'string', name: 'value' }
     ],
     () => loc('cmd_set'),
-    async ({args}) => {
+    async ({args}, doEmit) => {
         if (args.value == 'false')
             args.value = false;
         if (args.value == 'true')
@@ -310,6 +319,8 @@ commands.push(new Command(
             args.value = undefined;
         config.self[args.param] = args.value;
         config.save();
+        if (doEmit)
+            fwgui.emit('configChange', config.self);
     }
 ));
 commands.push(new Command(
@@ -319,7 +330,7 @@ commands.push(new Command(
         { type: 'string', name: 'value' }
     ],
     () => loc('cmd_?set'),
-    async ({args}) => {
+    async ({args}, doEmit) => {
         if (config.self[args.param])
             return;
         if (args.value == 'false')
@@ -332,6 +343,8 @@ commands.push(new Command(
             args.value = undefined;
         config.self[args.param] = args.value;
         config.save();
+        if (doEmit)
+            fwgui.emit('configChange', config.self);
     }
 ));
 commands.push(new Command(

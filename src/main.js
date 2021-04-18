@@ -17,10 +17,12 @@ ioHook.on('keydown', e => {
     if (f0talk.getPrintNextKey() === true)
         f0talk.setPrintNextKey(e.keycode);
 });
+
 ioHook.start();
-f0talk.main(require('gtts'), require('play-sound'));
+f0talk.main(require('gtts'), require('play-sound'), fwgui);
 // console.log(fs.readFileSync('wgui/index.html', 'utf-8'));
 // надо поднимать сервак...
+
 
 (async () => {
     if (process.argv.includes('-g')) {

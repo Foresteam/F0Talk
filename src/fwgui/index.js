@@ -4,6 +4,7 @@ const { launch: chrome } = require('chrome-launcher');
 
 const express = require('express');
 const { promisify } = require('util');
+const { emit } = require('iohook');
 const app = express();
 require('express-ws')(app);
 
@@ -53,6 +54,9 @@ const fwgui = {
         this.ws.send(JSON.stringify({
             endExpose: true
         }));
+    },
+    async emit(event, ...args) {
+
     }
 };
 
