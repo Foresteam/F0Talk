@@ -12,6 +12,7 @@ Download distribution from "releases" section. Install Google Chrome.
 #### Linux: 
 1. Install **mpv** via pacman, apt or whatever. You can also install **youtube-dl**, if you want to play sounds directly from YouTube (that may be much slower than using local files).
 2. Then, you have to deal with audio. You can run **vsink_t.sh** to get temporal VSink. If you want these changes to be permanent, you have to append the contents of **vsink.txt** to **/etc/pulse/default.pa**.
+3. To start in GUI mode, use "-g" parameter.
 
 Now you can simply select the desired audio output through the GUI of the app. On Linux, you can also control sound via **pavucontrol** (for example, use "auto" as program's output an set its monitor as an input of another program).
 
