@@ -19,10 +19,10 @@ module.exports = {
 
     leaveEmptyToSeeAll: ['leave empty to see all', 'оставьте пустым, чтобы увидеть всё'],
     langAnyText: ['<lang> <any text>', '<язык> <любой текст>'],
-    cfg_v: ['Player default volume, %', 'Стандартная громкость воспроизведения'],
-    cfg_tv: ['Player temporal volume. Affects the next sound, overrides "v"', 'Временная громкость. Срабатывает единажды. Перекрывает "v"'],
+    cfg_v: ['Player default volume, %', 'Стандартная громкость воспроизведения, %'],
+    cfg_tv: ['Player temporal volume, %. Affects the next sound, overrides "v"', 'Временная громкость, %. Срабатывает единажды. Перекрывает "v"'],
     cfg_device: ['Audio output device', 'Устройство выхода звука'],
-    cfg_chrome_path: ['Path to Google Chrome. Do not touch this, if GUI opens properly', 'Путь до Google Chrome. Не трогайте, если GUI работает'],
+    cfg_chrome_path: ['Path to Google Chrome. Do not touch this, if the GUI works', 'Путь до Google Chrome. Не трогайте, если GUI работает'],
     cfg_async: ['The next sound will bypass the queue', 'Обход очереди проигрывания, один раз'],
     cfg_lang: ['Interface language. "false" for English, "true" for Russian', 'Язык интерфейса. "false" - для английского, а "true" - для русского'],
 
@@ -48,14 +48,17 @@ module.exports = {
     execResult: ['Execution result', 'Результат выполнения'],
     interpretedLabel_0: ['Enter a command.', 'Введите команду.'],
     interpretedLabel_1: [' Help: ', ' Помощь: '],
-    grabHotkey: ['Grab hotkey', 'Захватить клавишу'],
+    grabHotkey: ['Grab a hotkey', 'Захватить клавишу'],
     pressKey: ['Press the key you want to grab...', 'Нажмите клавишу, которую хотите захватить...'],
     shortcutExample: ['. Example: shift+28', '. Пример: shift+28'],
     thisAppIs: [
         'This app is an advanced soundboard, that allows you not just to stream sounds but even to "voice chat" through terminal using GTTS. It can play sounds from a file, or an URL. The URL should be pointing to YouTube.com (MPV requires youtube-dl for this), or it should point to a file directly.',
         'Это приложение является продвинутым Soundboard\'ом, позволяющим не просто проигрывать звуки в микрофон, но и "на лету" транслировать текст, преобразованный в речь через GTTS, в указанный в настройках выход звука. Программа может проигрывать звуки как из файлов, так и по URL. Но URL должна быть на YouTube.com (MPV требует для этого youtube-dl) или быть прямой ссылкой на файл.'
     ],
-    isFor: ['Basically, the application may be used just in terminal (launch it without -g) as the GUI is just a shell.', 'Вообще, приложение может быть использовано и только из терминала, так как GUI - лишь оболочка.'],
+    isFor: [
+        'Basically, the application may be used just in terminal (launch it without -g) as the GUI is just a shell.',
+        'Вообще, приложение может быть использовано и только из терминала, так как GUI - лишь оболочка.'
+    ],
     shortTour: ['Short tour', 'Краткий экскурс'],
     shortTourR: [
         [
@@ -73,4 +76,20 @@ module.exports = {
             '"kbind" привязка горячей клавишы к команде или последовательности команд'
         ]
     ],
+    shortTourExample: [
+        [
+            'Command "set tv 150; e Hello world!" says the text in English with aplified volume (config parameter tv does this)',
+            'Command "ru Привет мир!" says the text in Russian',
+            'And "р Привет мир!" does the same as the one above, \'cause it\'s an alias to ru locale'
+        ],
+        [
+            'Команда "set tv 150; e Hello world!" произносит данную фразу на английском с увеличенной громкостью (это делает параметр конфига tv)',
+            'Команда "ru Привет мир!" говорит эту фразу на русском',
+            'При этом, "р Привет мир!" делает то же самое. То есть, "р" является псевдонимом названием локали ru.'
+        ]
+    ],
+    shortTourExamples: [
+        'Usage examples',
+        'Примеры использования'
+    ]
 };

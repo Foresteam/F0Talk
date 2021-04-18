@@ -65,15 +65,13 @@ export default {
 		openMyGit() {
 			fwgui.openMyGitHub();
 		},
-		langChange(v, send = true) {
+		async langChange(v, send = true) {
+			await fwgui.exposeEnd();
 			this.lang = v || false;
 			if (send)
 				fwgui.runCmd(`set lang ${this.lang}`);
+			this.help = await fwgui.runCmd('help');
 		}
-	},
-	async mounted() {
-		await fwgui.exposeEnd();
-		this.help = await fwgui.runCmd('help');
 	}
 };
 </script>

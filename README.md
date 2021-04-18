@@ -16,11 +16,7 @@ Download distribution from "releases" section. Install Google Chrome.
 Now you can simply select the desired audio output through the GUI of the app.
 
 ## Usage short tour
-* Use **play** to play a sound from file or URL
-* **bind** to bind a command to another command or a command sequence, so you can access it easier
-* **kbind** to bind a command to a key
-* **&lt;language&gt;** is for TTS (it uses GTTS to say text, language aliases come from Google too)
-* The hidden commands **e** (us layout) and **р** (Russian layout) are for TTS in English and Russian
+See in the app in "About" tab
 
 ## Build
 1. Install Node.JS, NPM and Yarn.

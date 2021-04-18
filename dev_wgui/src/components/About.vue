@@ -25,6 +25,14 @@
                         <li v-for="(v, k) in locales.shortTourR[+lang]" :key="k">{{ v }}</li>
                     </ul>
                 </p>
+                <p>
+                    {{ locales.shortTourExamples[+lang] }}:
+                    <ul>
+                        <li v-for="(v, k) in locales.shortTourExample[+lang]" :key="k">
+                            {{ v }}
+                        </li>
+                    </ul>
+                </p>
 				<p>
                     {{ locales.commands[+lang] }}:
                     <ul>
