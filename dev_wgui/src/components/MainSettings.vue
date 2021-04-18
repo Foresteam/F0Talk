@@ -1,20 +1,33 @@
 <template>
 	<div class="card">
+		<v-card-title primary-title>
+			{{ locales.mainTitle[+lang] }}
+		</v-card-title>
+		<v-divider></v-divider>
 		<div class="entries-buttons">
 			<v-select :items="devices" v-model="device" :label="locales.device[+lang]" @change="kek()"></v-select>
 			<v-switch label="En/Ru" class="langSwitch" :value="lang" @change="$emit('langChange', $event)"></v-switch>
 		</div>
 		<div class="entries-buttons">
-			<v-text-field :label="interpretedLabel" v-model="command" @keydown="$event.which == 13 && onEnter()"></v-text-field>
-			<v-btn color="primary" @click="onEnter()">{{ locales.run[+lang] }}</v-btn>
+			<v-text-field :label="interpretedLabel" v-model="command" @keydown="$event.which == 13 && runOnEnter()"></v-text-field>
+			<v-btn color="primary" @click="runOnEnter()">{{ locales.run[+lang] }}</v-btn>
 		</div>
-		{{ locales.popupText[+lang] }}
+		<i>{{ locales.popupText[+lang] }}</i>
 
+		<v-card-title primary-title>
+			{{ locales.configTitle[+lang] }}
+		</v-card-title>
+		<v-divider></v-divider>
 		<table style="margin: auto">
 			<tr v-for="(v, i) in config" :key="i">
 				<td class="pr-4">{{ i }}</td>
 				<td style="width: 500px">
-					<v-text-field :label="configHelp[i]" v-model="config[i]"></v-text-field>
+					<v-text-field :label="configHelp[i]" v-model="config[i]" @keydown="$event.which == 13 && applyParam(i)"></v-text-field>
+				</td>
+				<td class="pl-4">
+					<v-btn color="primary" @click="applyParam(i)">
+						{{ locales.apply[+lang] }}
+					</v-btn>
 				</td>
 			</tr>
 		</table>
@@ -49,7 +62,7 @@ export default {
 		dialogOut: ''
 	}),
 	methods: {
-		async onEnter() {
+		async runOnEnter() {
 			let rs = await fwgui.runCmd(this.command)
 			rs = rs.filter(v => v);
 			this.command = '';
@@ -78,6 +91,10 @@ export default {
 					return;
 				}
 			}
+		},
+		applyParam(k) {
+			console.log(k);
+			fwgui.runCmd(`set ${k} ${this.config[k]}`);
 		}
 	},
 	watch: {

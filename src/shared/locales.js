@@ -39,6 +39,9 @@ module.exports = {
     close: ['Close', 'Закрыть'],
     grabbed: ['Grabbed', 'Захвачено'],
     commands: ['Commands', 'Команды'],
+    mainTitle: ['Main', 'Основное'],
+    configTitle: ['Config file', 'Файл настроек'],
+    apply: ['Apply', 'Применить'],
 
     mainSettingsTab: ['Main settings', 'Основные настройки'],
     commandShortcutsTab: ['Command shortcuts', 'Сокращения команд'],
@@ -111,11 +114,13 @@ module.exports = {
     knownBugs: [
         [
             '(Windows) when playing a video, it opens in another window.',
-            'Temporal volume works a bit strange, especially with async (queue bypassing).'
+            'Temporal volume works a bit strange, especially with async (queue bypassing).',
+            'Requires up to 3 Ctrl+C taps to quit'
         ],
         [
             '(Windows) при воспроизведении видео файла открывается отдельное окно плеера.',
-            'Временная громкость работает странно, особенно с асинхронным воспроизведением (async).'
+            'Временная громкость работает странно, особенно с асинхронным воспроизведением (async).',
+            'Требует до 3 нажатий Ctrl+C, чтобы закрыться'
         ]
     ]
 };

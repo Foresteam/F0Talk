@@ -167,7 +167,7 @@ const main = async (_GTTS, _sound) => {
 let printNextKey = false;
 
 commands.push(new Command(
-    ['play', 'p'],
+    ['play'],
     [
         { type: '...string', name: 'filename' }
     ],
