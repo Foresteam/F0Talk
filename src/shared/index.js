@@ -143,7 +143,7 @@ const runCmd = async (raw, _console = true) => {
     if (raw.startsWith('bind') || raw.startsWith('kbind'))
         raw = [raw];
     else
-        raw = raw.split(';');
+        raw = raw.split(';;');
     for (let _raw of raw) {
         _raw = _raw.trim();
         const parsed = argsParser.parse(_raw, commands);

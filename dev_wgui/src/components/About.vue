@@ -41,11 +41,19 @@
                         </li>
                     </ul>
 				</p>
+                <p>
+                    {{ locales.knownBugsTitle[+lang] }}:
+                    <ul>
+                        <li v-for="(text, i) in locales.knownBugs[+lang]" :key="i">
+                            {{ text }}
+                        </li>
+                    </ul>
+                </p>
 			</v-col>
 		</v-row>
 	</v-container>
     <v-footer>
-        Created by Foresteam
+        Created by Foresteam. {{ locales.translationIssues[+lang] }}
     </v-footer>
     </div>
 </template>
