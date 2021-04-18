@@ -348,13 +348,7 @@ commands.push(new Command(
     }
 ));
 commands.push(new Command(
-    ['cfghelp'],
-    [],
-    () => loc('cmd_cfghelp'),
-    async () => Object.entries(cfgHelp).map(v => `${v[0]} - ${v[1]()}`)
-));
-commands.push(new Command(
-    ['help', '?'],
+    ['help'],
     [{type: 'string', name: 'command', desc: () => loc('leaveEmptyToSeeAll')}],
     () => loc('cmd_help'),
     async ({msg, args}) => {
@@ -371,6 +365,12 @@ commands.push(new Command(
                 fs.push(com.printHelp());
         return fs || 'Command not found';
     }
+));
+commands.push(new Command(
+    ['cfghelp'],
+    [],
+    () => loc('cmd_cfghelp'),
+    async () => Object.entries(cfgHelp).map(v => `${v[0]} - ${v[1]()}`)
 ));
 commands.push(new Command(
     ['', 'р', 'e'],

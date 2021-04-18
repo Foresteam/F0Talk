@@ -63,7 +63,9 @@ export default {
 	}),
 	methods: {
 		async runOnEnter() {
-			let rs = await fwgui.runCmd(this.command)
+			if (!this.command.trim())
+				return;
+			let rs = await fwgui.runCmd(this.command);
 			rs = rs.filter(v => v);
 			this.command = '';
 			if (rs.length > 0) {
@@ -79,7 +81,8 @@ export default {
 		},
 		setCommandLabel(v) {
 			const text = this.locales.interpretedLabel_0[+this.lang];
-			v = v.split(' ')[0];
+			v = v.split(';;');
+			v = v[v.length - 1].trim().split(' ')[0];
 			if (!v) {
 				this.interpretedLabel = text;
 				return;
