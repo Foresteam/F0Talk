@@ -63,10 +63,8 @@ export default {
 				let [first, ...rest] = v.split(' - ');
 				return [first, rest.join(' - ')];
 			}));
-		}
-	},
-	watch: {
-		command(v, _) {
+		},
+		setCommandLabel(v) {
 			const text = this.locales.interpretedLabel_0[+this.lang];
 			v = v.split(' ')[0];
 			if (!v) {
@@ -80,6 +78,11 @@ export default {
 					return;
 				}
 			}
+		}
+	},
+	watch: {
+		command(v) {
+			this.setCommandLabel(v);
 		},
 		device(device, old) {
 			if (!old)
@@ -88,6 +91,7 @@ export default {
 		},
 		lang(nlang, olang) {
 			this.setConfigHelp();
+			this.setCommandLabel(this.command);
 		}
 	},
 	async created() {
