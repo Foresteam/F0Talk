@@ -9,7 +9,6 @@ const { promisify } = require('util');
 const RELEASE = fs.existsSync('RELEASE');
 
 ioHook.on('keydown', e => {
-    // console.log(e);
     let ctrlShift = (e.shiftKey << 1) + e.ctrlKey;
     let cmd = f0talk.keyBinds.self[ctrlShift][e.keycode];
     if (cmd)
@@ -20,8 +19,6 @@ ioHook.on('keydown', e => {
 
 ioHook.start();
 f0talk.main(require('gtts'), require('play-sound'), fwgui);
-// console.log(fs.readFileSync('wgui/index.html', 'utf-8'));
-// надо поднимать сервак...
 
 
 (async () => {
