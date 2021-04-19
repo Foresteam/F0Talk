@@ -30,7 +30,7 @@
 		</v-app-bar>
 
 		<v-main>
-			<v-tabs-items v-model="tab"><!-- style="background: none" -->
+			<v-tabs-items v-model="tab" ref="tabs"><!-- style="background: none" -->
 				<v-tab-item><MainSettings :help="help" :lang="lang" @langChange="langChange" :locales="locales"/></v-tab-item>
 				<v-tab-item><Shortcuts :locales="locales" :lang="lang"/></v-tab-item>
 				<v-tab-item><Hotkeys :locales="locales" :lang="lang"/></v-tab-item>

@@ -56,7 +56,12 @@ const fwgui = {
         }));
     },
     async emit(event, ...args) {
-
+        if (!this.ws)
+            return;
+        this.ws.send(JSON.stringify({
+            event,
+            args
+        }));
     }
 };
 

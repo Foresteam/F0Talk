@@ -69,6 +69,7 @@ export default {
         editShortcut(shortcut) {
             this.shortcut = shortcut;
             this.command = this.shortcuts[shortcut];
+            window.scroll({ top: 0, left: 0, behavior: 'smooth' });
         },
         async fetchShortcuts() {
             let tshortcuts = (await fwgui.runCmd('binds')).map(v => v.split(' => '));

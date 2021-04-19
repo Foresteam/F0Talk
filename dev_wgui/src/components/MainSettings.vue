@@ -5,7 +5,7 @@
 		</v-card-title>
 		<v-divider></v-divider>
 		<div class="entries-buttons">
-			<v-select :items="devices" v-model="device" :label="locales.device[+lang]" @change="kek()"></v-select>
+			<v-select :items="devices" v-model="config.device" :label="locales.device[+lang]" @change="applyParam('device')"></v-select>
 			<v-switch label="En/Ru" class="langSwitch" :value="lang" @change="$emit('langChange', $event)"></v-switch>
 		</div>
 		<div class="entries-buttons">
@@ -104,11 +104,6 @@ export default {
 		command(v) {
 			this.setCommandLabel(v);
 		},
-		device(device, old) {
-			if (!old)
-				return;
-			fwgui.runCmd(`set device ${device}`);
-		},
 		lang(nlang, olang) {
 			this.setConfigHelp();
 			this.setCommandLabel(this.command);
@@ -118,10 +113,11 @@ export default {
 		await fwgui.exposeEnd();
 		this.config = await fwgui.getConfig();
 		this.devices = await fwgui.getMPVDeviceList();
-		this.device = this.config.device;
 		this.$emit('langChange', this.config.lang, false);
 		this.setConfigHelp();
 		this.command = '';
+
+		fwgui.on('configChange', newConfig => this.config = newConfig);
 	}
 }
 </script>
