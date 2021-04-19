@@ -3,8 +3,8 @@
 This app is an advanced soundboard, that allows you not just to stream sounds but even to "voice chat" through terminal using GTTS. It can play sounds from a file, or an URL. The URL should be pointing to YouTube.com (MPV requires youtube-dl for this), or it should point to a file directly. Basically, the application may be used just in terminal (launch it without -g) as the GUI is just a shell.
 
 Tested on:
-* Windows 10
-* Linux 5.11.10-1-MANJARO
+* Windows 10 x64
+* Linux 5.11.10-1-MANJARO x64
 
 ## Installation
 Download distribution from "releases" section. Install Google Chrome.
