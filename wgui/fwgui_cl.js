@@ -3,6 +3,7 @@ var fwgui = {
 	waitingForReply: {},
 	exposed: {},
 	_exposeEnd: false,
+	subscribes: {},
 	async exposeEnd() {
 		while (!this._exposeEnd)
 			await new Promise(resolve => setTimeout(resolve, 50));
@@ -32,6 +33,11 @@ var fwgui = {
 		delete this.waitingForReply[fid];
 		return rs;
 	},
+	on(eventName, callback) {
+		if (!this.subscribes[eventName])
+			this.subscribes[eventName] = [];
+		this.subscribes[eventName].push(callback);
+	},
 	start() {
 		this.ws = new WebSocket('ws://localhost:8080');
 		this.ws.connected = false;
@@ -47,23 +53,22 @@ var fwgui = {
 				console.log(msg);
 				let f = this.exposed[msg.func];
 				if (msg.expose)
-					this.resolve(msg.func);
-				else if ('reply' in msg)
-					this.waitingForReply[msg.fid] = msg.reply;
-				else if (msg.endExpose)
-					this._exposeEnd = true;
-				else {
-					if (f) {
-						this.ws.send(JSON.stringify({
-							reply: await f(...msg.args) || null,
-							fid: msg.fid
-						}));
-					}
-					else {
-						this.error(`function '${msg.func}' not found`);
-						console.log(msg);
-					}
+					return this.resolve(msg.func);
+				if ('reply' in msg)
+					return this.waitingForReply[msg.fid] = msg.reply;
+				if (msg.endExpose)
+					return this._exposeEnd = true;
+				if (msg.event) {
+					for (let sub of (this.subscribes[msg.event] || []))
+						sub(...msg.args);
+					return;
 				}
+				if (f)
+					return this.ws.send(JSON.stringify({
+						reply: await f(...msg.args) || null,
+						fid: msg.fid
+					}));
+				this.error(`function '${msg.func}' not found`);
 			}
 			catch (e) {
 			    this.error(`Clientside error: ${e.stack}`);
