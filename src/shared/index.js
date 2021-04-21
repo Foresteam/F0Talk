@@ -146,6 +146,8 @@ const runCmd = async (raw, _console = true) => {
         raw = raw.split(';;');
     for (let _raw of raw) {
         _raw = _raw.trim();
+        if (!_raw)
+            continue;
         const parsed = argsParser.parse(_raw, commands);
         if (parsed)
             output = output.concat(await parsed.cmd.execute({ _raw, args: parsed.args, refwith: parsed.refwith }, _console));
@@ -374,7 +376,7 @@ commands.push(new Command(
 ));
 commands.push(new Command(
     ['', 'р', 'e'],
-    [ { type: '...string', name: 'default', desc: () => loc('langAnyText')} ],
+    [ { type: '...string', name: 'default', desc: () => loc('langAnyText') } ],
     () => loc('cmd_tts'),
     async ({text, args}) => {
         let [lang, ...txt] = args.default;
