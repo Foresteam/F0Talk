@@ -1,2 +1,9 @@
 load-module module-null-sink sink_name=vsink sink_properties=device.description=vsink
 load-module module-remap-source master=vsink.monitor source_name=VSink source_properties="device.description=VSink"
+
+# if you want to use your micro as well
+# micro=alsa_input.usb-GeneralPlus_USB_Audio_Device-00.mono-fallback
+load-module module-null-sink sink_name=vsink_mix sink_properties=device.description=vsink_mix
+load-module module-loopback latency_msec=60 adjust_time=6 source=YOUR_MICRO sink=vsink_mix
+load-module module-loopback latency_msec=60 adjust_time=6 source=vsink.monitor sink=vsink_mix
+load-module module-remap-source master=vsink_mix.monitor source_name=VSinkMix source_properties="device.description=VSinkMix"
