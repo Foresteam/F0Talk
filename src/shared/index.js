@@ -122,7 +122,7 @@ const doq = async async => {
             await new Promise(resolve => sp(name, params, resolve));
             cache.self.push(lang + ' ' + text);
             cache.save();
-        } catch (e) { console.log(locales.invalidLang[+config.self.lang], FgRed, e.stack) }
+        } catch (e) { console.log(locales.invalidLang[+config.self.lang], FgRed, e.stack, Reset) }
     }
     if (!async) {
         inq = false;
@@ -168,9 +168,9 @@ const main = async (_GTTS, _sound, _fwgui, unload) => {
         process.exit();
     });
     process.on('exit', unload);
-    console.log(`${FgWhite}${loc('welcomeTo')} ${FgBlue}F0Talk${FgWhite}. ${loc('aTool')}.`);
+    console.log(`${Reset}${loc('welcomeTo')} ${FgBlue}F0Talk${Reset}. ${loc('aTool')}.`);
     while (true) {
-        runCmd(await cin(FgCyan + '> ' + FgWhite));
+        runCmd(await cin(FgCyan + '> ' + Reset));
     }
 };
 let printNextKey = false;
