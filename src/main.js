@@ -18,8 +18,7 @@ ioHook.on('keydown', e => {
 });
 
 ioHook.start();
-f0talk.main(require('gtts'), require('play-sound'), fwgui);
-
+f0talk.main(require('gtts'), require('play-sound'), fwgui, () => ioHook.unload());
 
 (async () => {
     if (process.argv.includes('-g')) {

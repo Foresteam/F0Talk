@@ -159,13 +159,19 @@ const runCmd = async (raw, _console = true) => {
             console.log(v);
 };
 
-const main = async (_GTTS, _sound, _fwgui) => {
+const main = async (_GTTS, _sound, _fwgui, unload) => {
     GTTS = _GTTS;
     fwgui = _fwgui;
     sound = _sound({ player: MPV });
+    rl.on('SIGINT', () => {
+        unload();
+        process.exit();
+    });
+    process.on('exit', unload);
     console.log(`${FgWhite}${loc('welcomeTo')} ${FgBlue}F0Talk${FgWhite}. ${loc('aTool')}.`);
-    while (true)
+    while (true) {
         runCmd(await cin(FgCyan + '> ' + FgWhite));
+    }
 };
 let printNextKey = false;
 
