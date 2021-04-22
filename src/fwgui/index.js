@@ -24,9 +24,11 @@ const fwgui = {
         const url = `http://localhost:${clientPort}/` + startPage;
         let success = false;
         await chrome({ chromeFlags: [`--app=${url}`, '--window-size=1280,720'], chromePath: chromePath || undefined }).then(instance => {
-            if (closeOnExit)
+            if (closeOnExit) {
                 process.addListener('exit', () => instance ? instance.kill() : null);
-            success = true;
+                instance.process.addListener('exit', () => process.exit())
+            }
+            success = instance;
             return sv;
         }).catch(() =>
             console.log('Couldn\'t find Google Chrome. Please, install it properly or set the path manually through "set chrome_path <path>", then restart FTalk.')

@@ -5,7 +5,8 @@
 		</v-card-title>
 		<v-divider></v-divider>
 		<div class="entries-buttons">
-			<v-select :items="devices" v-model="config.device" :label="locales.device[+lang]" @change="applyParam('device')"></v-select>
+			<v-select :items="devices" v-model="config.device" :label="locales.cfg_device[+lang]" @change="applyParam('device')"></v-select>
+			<v-select :items="devices" v-model="config.device2" :label="locales.cfg_device2[+lang]" @change="applyParam('device2')"></v-select>
 			<v-switch label="En/Ru" class="langSwitch" :value="lang" @change="$emit('langChange', $event)"></v-switch>
 		</div>
 		<div class="entries-buttons">
@@ -113,6 +114,7 @@ export default {
 		await fwgui.exposeEnd();
 		this.config = await fwgui.getConfig();
 		this.devices = await fwgui.getMPVDeviceList();
+		this.devices.splice(0, 0, '');
 		this.$emit('langChange', this.config.lang, false);
 		this.setConfigHelp();
 		this.command = '';

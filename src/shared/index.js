@@ -60,6 +60,7 @@ const cfgHelp = {
     v: () => loc('cfg_v'),
     tv: () => loc('cfg_tv'),
     device: () => loc('cfg_device'),
+    device2: () => loc('cfg_device2'),
     chrome_path: () => loc('cfg_chrome_path'),
     async: () => loc('cfg_async'),
     lang: () => loc('cfg_lang')
@@ -67,7 +68,7 @@ const cfgHelp = {
 const config = new Config(CONFIG, {
     v: '100',
     tv: false,
-    device: '',
+    device: 'auto',
     device2: '',
     chrome_path: undefined,
     lang: false
