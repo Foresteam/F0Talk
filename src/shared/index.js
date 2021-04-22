@@ -55,7 +55,7 @@ try { fs.mkdirSync(CACHEDIR); } catch {}
 const q = [];
 const commands = [];
 let inq = false;
-let lastAudio, asyncAudios = [];
+let syncAudios = [], asyncAudios = [];
 const cfgHelp = {
     v: () => loc('cfg_v'),
     tv: () => loc('cfg_tv'),
@@ -68,6 +68,7 @@ const config = new Config(CONFIG, {
     v: '100',
     tv: false,
     device: '',
+    device2: '',
     chrome_path: undefined,
     lang: false
 });
@@ -80,7 +81,7 @@ const keyBinds = new Config(KEYBINDS, [
     { } // ctrl + shift
 ]);
 
-const doq = async async => {
+const doQ = async async => {
     if (q.length == 0 || inq && !async)
         return;
     if (!async)
@@ -95,38 +96,48 @@ const doq = async async => {
     let cached = cache.self.findIndex(v => v.toLowerCase() == lang.toLowerCase() + ' ' + text.toLowerCase());
 
     const params = { mpv: ['--no-video', '--volume=' + vol] };
-    if (_config.device)
-        params.mpv.push('--audio-device=' + _config.device);
     config.self = _config;
     if (config.self.tv && (!async || !inq)) {
         config.self.tv = false;
         config.save();
     }
 
-    let sp = (...prs) => {
-        let t = sound.play(...prs);
+    let sp = (fname, resolve) => {
+        let toPush = [];
+        for (let v of [_config.device, _config.device2]) {
+            if (!v)
+                continue;
+            let _params = {};
+            Object.assign(_params, params);
+            _params.mpv.push('--audio-device=' + v);
+
+            let t = sound.play(fname, _params, resolve);
+            toPush.push(t);
+        }
         if (async)
-            asyncAudios.push(t);
+            asyncAudios.push(toPush);
         else
-            lastAudio = t;
+            syncAudios = toPush;
     }
 
     if (lang == 'play' || cached > -1)
-        await new Promise(resolve => sp(cached > -1 ? CACHEDIR + cached + '.mp3' : text, params, resolve));
+        await new Promise(resolve => sp(cached > -1 ? CACHEDIR + cached + '.mp3' : text, resolve));
     else {
         try {
             let gtts = new GTTS(text, lang);
             let name = CACHEDIR + cache.self.length + '.mp3';
             await new Promise(resolve => gtts.save(name, resolve));
             // await new Promise(resolve => gtts(cmd, false).save(name, text, resolve));
-            await new Promise(resolve => sp(name, params, resolve));
+            await new Promise(resolve => sp(name, resolve));
             cache.self.push(lang + ' ' + text);
             cache.save();
         } catch (e) { console.log(locales.invalidLang[+config.self.lang], FgRed, e.stack, Reset) }
     }
     if (!async) {
         inq = false;
-        doq();
+        if (syncAudios.length > 0)
+            syncAudios.splice(0, 1);
+        doQ();
     }
 };
 
@@ -191,7 +202,7 @@ commands.push(new Command(
             q.push(tobj);
         else
             q.splice(0, 0, tobj);
-        doq(async);
+        doQ(async);
     }
 ));
 commands.push(new Command(
@@ -199,8 +210,9 @@ commands.push(new Command(
     [],
     () => loc('cmd_skip'),
     async ({text, args}) => {
-        if (lastAudio)
-            lastAudio.kill();
+        for (let v of syncAudios)
+            if (v)
+                v.kill();
     }
 ));
 commands.push(new Command(
@@ -209,10 +221,13 @@ commands.push(new Command(
     () => loc('cmd_stop'),
     async ({text, args}) => {
         q.splice(0, q.length);
-        if (lastAudio)
-            lastAudio.kill();
-        for (let v of asyncAudios)
-            v.kill();
+        for (let v of syncAudios)
+            if (v)
+                v.kill();
+        for (let aus of asyncAudios)
+            for (let v of aus)
+                if (v)
+                    v.kill();
         asyncAudios.splice(0, asyncAudios.length);
     }
 ));
@@ -395,7 +410,7 @@ commands.push(new Command(
             let tconfig = {};
             Object.assign(tconfig, config.self);
             q.push({ lang, text: txt.join(' '), tconfig });
-            doq();
+            doQ();
         }
     }
 ));
