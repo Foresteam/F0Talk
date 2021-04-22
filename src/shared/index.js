@@ -166,8 +166,7 @@ const runCmd = async (raw, _console = true) => {
     if (!_console)
         return output;
     for (let v of output)
-        if (v)
-            console.log(v);
+        v && console.log(v);
 };
 
 const main = async (_GTTS, _sound, _fwgui, unload) => {
@@ -211,8 +210,7 @@ commands.push(new Command(
     () => loc('cmd_skip'),
     async ({text, args}) => {
         for (let v of syncAudios)
-            if (v)
-                v.kill();
+            v && v.kill();
     }
 ));
 commands.push(new Command(
@@ -222,12 +220,10 @@ commands.push(new Command(
     async ({text, args}) => {
         q.splice(0, q.length);
         for (let v of syncAudios)
-            if (v)
-                v.kill();
+            v && v.kill();
         for (let aus of asyncAudios)
             for (let v of aus)
-                if (v)
-                    v.kill();
+                v && v.kill();
         asyncAudios.splice(0, asyncAudios.length);
     }
 ));
