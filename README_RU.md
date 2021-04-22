@@ -10,7 +10,7 @@
 Скачайте дистрибутив из секции "releases". Установите Google Chrome.
 
 #### Windows:
-1. Установите виртуальный кабель https://vb-audio.com/Cable/ 
+1. Установите и настройте [виртуальный кабель](https://vb-audio.com/Cable/) или [виртуальный микшер](https://vb-audio.com/Voicemeeter/)
 2. Запустите **F0Talk GUI.bat**, или непосредственно **F0Talk.exe**
 
 #### Linux: 

@@ -10,7 +10,7 @@ Tested on:
 Download distribution from "releases" section. Install Google Chrome.
 
 #### Windows:
-1. Install VCable https://vb-audio.com/Cable/ 
+1. Install and configure a [virtual cable](https://vb-audio.com/Cable/) or a [virtual mixer](https://vb-audio.com/Voicemeeter/)
 2. Run **F0Talk.exe** itself, or **F0Talk GUI.bat**
 
 #### Linux: 
