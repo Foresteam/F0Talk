@@ -5,6 +5,7 @@ const f0talk = require('./shared/index');
 const fwgui = require('./fwgui');
 const open = require('open');
 const { promisify } = require('util');
+const { exec } = require('child_process');
 
 const RELEASE = fs.existsSync('RELEASE');
 
@@ -28,6 +29,11 @@ f0talk.main(require('gtts'), require('play-sound'), fwgui, () => ioHook.unload()
         fwgui.expose('runCmd', async raw => await f0talk.runCmd(raw, false));
         fwgui.expose('getConfig', () => f0talk.config.self);
         fwgui.expose(f0talk.getMPVDeviceList);
+        fwgui.expose(async function chooseFile() {
+            let { stdout: path } = await promisify(exec)('zenity --file-selection');
+            return path;
+        });
+        
         fwgui.endExpose();
     }
 })();
