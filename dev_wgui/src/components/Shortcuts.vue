@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div class="card">
+            <v-btn color="primary" @click="chooseFile">{{ locales.chooseFile[+lang] }}</v-btn>
+        </div>
         <div class="entries-buttons">
             <v-text-field :label="locales.shortcut[+lang]" style="width: 0" v-model="shortcut"></v-text-field>
             <v-text-field :label="locales.command[+lang]" v-model="command"></v-text-field>
@@ -81,6 +84,9 @@ export default {
         },
         runShortcut(bind) {
             fwgui.runCmd(bind);
+        },
+        async chooseFile() {
+            this.command += await fwgui.chooseFile() || '';
         }
     },
     components: {

@@ -1,8 +1,9 @@
 <template>
     <div>
         <div class="card">
-            <v-btn color="primary" @click="grabKey">{{ locales.grabHotkey[+lang] }}</v-btn>
+            <v-btn color="primary" @click="grabKey">{{ locales.grabKey[+lang] }}</v-btn>
             <span v-if="grabbing" class="mh-15">{{ locales.pressKey[+lang] }}</span>
+            <v-btn color="primary" @click="chooseFile" class="ml-4">{{ locales.chooseFile[+lang] }}</v-btn>
         </div>
         <v-snackbar v-model="grabbed">
             {{ locales.grabbed[+lang] }} {{ grabbedKey }}
@@ -50,6 +51,7 @@
 </template>
 
 <script>
+import { chooseFile } from '../../../src/shared/locales';
 
 export default {
     props: ['locales', 'lang'],
@@ -94,6 +96,9 @@ export default {
             this.grabbedKey = await fwgui.runCmd('getkey');
             this.grabbed = true;
             this.grabbing = false;
+        },
+        async chooseFile() {
+            this.command += await fwgui.chooseFile() || '';
         }
     },
     components: {

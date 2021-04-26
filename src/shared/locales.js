@@ -43,6 +43,7 @@ module.exports = {
     mainTitle: ['Main', 'Основное'],
     configTitle: ['Config file', 'Файл настроек'],
     apply: ['Apply', 'Применить'],
+    chooseFile: ['Pick a file', 'Выбрать файл'],
 
     mainSettingsTab: ['Main settings', 'Основные настройки'],
     commandShortcutsTab: ['Command shortcuts', 'Сокращения команд'],
@@ -51,7 +52,7 @@ module.exports = {
     execResult: ['Execution result', 'Результат выполнения'],
     interpretedLabel_0: ['Enter a command.', 'Введите команду.'],
     interpretedLabel_1: [' Help: ', ' Помощь: '],
-    grabHotkey: ['Grab a hotkey', 'Захватить клавишу'],
+    grabKey: ['Grab a key', 'Захватить клавишу'],
     pressKey: ['Press the key you want to grab...', 'Нажмите клавишу, которую хотите захватить...'],
     shortcutExample: ['. Example: shift+28', '. Пример: shift+28'],
     thisAppIs: [

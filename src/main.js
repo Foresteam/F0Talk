@@ -6,6 +6,7 @@ const fwgui = require('./fwgui');
 const open = require('open');
 const { promisify } = require('util');
 const { exec } = require('child_process');
+const { platform } = require('os');
 
 const RELEASE = fs.existsSync('RELEASE');
 
@@ -30,7 +31,10 @@ f0talk.main(require('gtts'), require('play-sound'), fwgui, () => ioHook.unload()
         fwgui.expose('getConfig', () => f0talk.config.self);
         fwgui.expose(f0talk.getMPVDeviceList);
         fwgui.expose(async function chooseFile() {
-            let { stdout: path } = await promisify(exec)('zenity --file-selection');
+            let cmd = 'zenity --file-selection';
+            if (platform() == 'linux' && fs.existsSync('/usr/bin/kdialog'))
+                cmd = 'kdialog --getopenfilename';
+            let { stdout: path } = await promisify(exec)(cmd).catch(() => {}) || { };
             return path;
         });
         
