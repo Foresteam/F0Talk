@@ -259,7 +259,9 @@ commands.push(new Command(
         { type: '...string', name: 'cmd' }
     ],
     () => loc('cmd_bind'),
-    async ({text, args}, doEmit) => {
+    async ({args}, doEmit) => {
+        if (!args.shortcut || !args.cmd)
+            return;
         shortcuts.self[args.shortcut] = args.cmd.join(' ');
         shortcuts.save();
         if (doEmit)
@@ -270,7 +272,9 @@ commands.push(new Command(
     ['unbind'],
     [{ type: 'string', name: 'shortcut' }],
     () => loc('cmd_unbind'),
-    async ({text, args}, doEmit) => {
+    async ({args}, doEmit) => {
+        if (!args.shortcut)
+            return;
         delete shortcuts.self[args.shortcut];
         shortcuts.save();
         if (doEmit)
@@ -285,6 +289,8 @@ commands.push(new Command(
     ],
     () => loc('cmd_kbind'),
     async ({args}, doEmit) => {
+        if (!args.keys || !args.cmd)
+            return;
         let keys = args.keys.split('+');
         let ctrlShift = (keys.includes('shift') << 1) + keys.includes('ctrl');
         keyBinds.self[ctrlShift][parseInt(keys[keys.length - 1])] = args.cmd.join(' ');
@@ -300,6 +306,8 @@ commands.push(new Command(
     ],
     () => loc('cmd_kunbind'),
     async ({args}, doEmit) => {
+        if (!args.keys)
+            return;
         let keys = args.keys.split('+');
         let ctrlShift = (keys.includes('shift') << 1) + keys.includes('ctrl');
         delete keyBinds.self[ctrlShift][parseInt(keys[keys.length - 1])];
@@ -329,6 +337,8 @@ commands.push(new Command(
     ],
     () => loc('cmd_set'),
     async ({args}, doEmit) => {
+        if (!args.param || args.value == undefined)
+            return;
         if (args.value == 'false')
             args.value = false;
         if (args.value == 'true')
@@ -351,6 +361,8 @@ commands.push(new Command(
     ],
     () => loc('cmd_?set'),
     async ({args}, doEmit) => {
+        if (!args.param || args.value == undefined)
+            return;
         if (config.self[args.param])
             return;
         if (args.value == 'false')

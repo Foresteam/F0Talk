@@ -56,6 +56,8 @@ export default {
     }),
     methods: {
         addShortcut() {
+            if (!this.shortcut || !this.command)
+                return;
             this.shortcuts[this.shortcut] = this.command;
             fwgui.runCmd(`bind ${this.shortcut} ${this.command}`);
             this.$forceUpdate();
