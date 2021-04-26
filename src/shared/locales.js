@@ -44,6 +44,7 @@ module.exports = {
     configTitle: ['Config file', 'Файл настроек'],
     apply: ['Apply', 'Применить'],
     chooseFile: ['Pick a file', 'Выбрать файл'],
+    search: ['Search', 'Поиск'],
 
     mainSettingsTab: ['Main settings', 'Основные настройки'],
     commandShortcutsTab: ['Command shortcuts', 'Сокращения команд'],
