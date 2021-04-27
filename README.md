@@ -17,7 +17,7 @@ Download distribution from "releases" section. Install Google Chrome.
 #### Linux: 
 1. Install **mpv**, **libxkbcommon-x11** via pacman, apt or whatever.
 2. Optionally. Install **youtube-dl**, if you want to play sounds directly from YouTube (that may be much slower than using local files).
-3. Optionally. Install **zanity** or **kdialog** (depends on your DE), if you want to use GUI file picker.
+3. Optionally. Install **zenity** or **kdialog** (depends on your DE), if you want to use GUI file picker.
 4. Then, you have to deal with audio. You can run **vsink_t.sh** to get temporal VSink. If you want these changes to be permanent, you have to append the contents of **vsink.txt** to **/etc/pulse/default.pa**.
 5. To start in GUI mode, use "-g" parameter.
 
