@@ -10,13 +10,16 @@ Tested on:
 Download distribution from "releases" section. Install Google Chrome.
 
 #### Windows:
-1. Install and configure a [virtual cable](https://vb-audio.com/Cable/) and/or a [virtual mixer](https://vb-audio.com/Voicemeeter/)
-2. Run **F0Talk.exe** itself, or **F0Talk GUI.bat**
+1. Install MS Visual C++ Redists from **msvcr** folder.
+2. Optionally. Install and configure a [virtual cable](https://vb-audio.com/Cable/) and/or a [virtual mixer](https://vb-audio.com/Voicemeeter/).
+3. Run **F0Talk.exe** itself, or **F0Talk GUI.bat**.
 
 #### Linux: 
-1. Install **mpv** via pacman, apt or whatever. You can also install **youtube-dl**, if you want to play sounds directly from YouTube (that may be much slower than using local files).
-2. Then, you have to deal with audio. You can run **vsink_t.sh** to get temporal VSink. If you want these changes to be permanent, you have to append the contents of **vsink.txt** to **/etc/pulse/default.pa**.
-3. To start in GUI mode, use "-g" parameter.
+1. Install **mpv**, **libxkbcommon-x11** via pacman, apt or whatever.
+2. Optionally. Install **youtube-dl**, if you want to play sounds directly from YouTube (that may be much slower than using local files).
+3. Optionally. Install **zanity** or **kdialog** (depends on your DE), if you want to use GUI file picker.
+4. Then, you have to deal with audio. You can run **vsink_t.sh** to get temporal VSink. If you want these changes to be permanent, you have to append the contents of **vsink.txt** to **/etc/pulse/default.pa**.
+5. To start in GUI mode, use "-g" parameter.
 
 Now you can simply select the desired audio output through the GUI of the app. On Linux, you can also control sound via **pavucontrol** (for example, use "auto" as program's output an set its monitor as an input of another program).
 
