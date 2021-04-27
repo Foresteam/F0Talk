@@ -17,7 +17,7 @@
             <v-text-field :label="locales.search[+lang]" v-model="search"></v-text-field>
         </div>
         <v-list>
-            <v-card class="card" color="secondary" v-for="[k, v] of Object.entries(shortcuts).filter(V => (V[0], V[1]).indexOf(search) >= 0)" :key="k">
+            <v-card class="card" color="secondary" v-for="[k, v] of Object.entries(shortcuts).filter(V => (V[0] + V[1]).indexOf(search) >= 0)" :key="k">
                 <v-list-item>
                     <v-list-item-content class="">
                         <table>
