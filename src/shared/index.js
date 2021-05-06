@@ -337,7 +337,8 @@ commands.push(new Command(
     ],
     () => loc('cmd_set'),
     async ({args}, doEmit) => {
-        if (!args.param || args.value == undefined)
+        console.log(typeof args.value, args.value);
+        if (!args.param)
             return;
         if (args.value == 'false')
             args.value = false;

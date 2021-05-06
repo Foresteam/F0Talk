@@ -11,6 +11,7 @@
 		</div>
 		<div class="entries-buttons">
 			<v-text-field :label="interpretedLabel" v-model="command" @keydown="$event.which == 13 && runOnEnter()"></v-text-field>
+			<v-btn color="primary" @click="chooseFile">{{ locales.chooseFile[+lang] }}</v-btn>
 			<v-btn color="primary" @click="runOnEnter()">{{ locales.run[+lang] }}</v-btn>
 		</div>
 		<i>{{ locales.popupText[+lang] }}</i>
@@ -98,8 +99,11 @@ export default {
 		},
 		applyParam(k) {
 			console.log(k);
-			fwgui.runCmd(`set ${k} ${this.config[k]}`);
-		}
+			fwgui.runCmd(`set ${k} "${this.config[k]}"`);
+		},
+		async chooseFile() {
+            this.command += await fwgui.chooseFile() || '';
+        }
 	},
 	watch: {
 		command(v) {

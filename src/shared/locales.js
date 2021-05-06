@@ -34,7 +34,7 @@ module.exports = {
     command: ['Command', 'Команда'],
     edit: ['Edit', 'Изменить'],
     remove: ['Remove', 'Удалить'],
-    run: ['Run', 'Запустить'],
+    run: ['Run', 'Выполнить'],
     welcomeTo: ['Welcome to', 'Добро пожаловать в'],
     aboutTab: ['About', 'О программе'],
     close: ['Close', 'Закрыть'],
