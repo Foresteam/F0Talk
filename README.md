@@ -27,7 +27,7 @@ Now you can simply select the desired audio output through the GUI of the app. O
 See in the app in "About" tab
 
 ## Build
-1. Install Node.JS, NPM and Yarn.
+1. Install Node.JS 14.15.3 and Yarn.
 2. Install all dependencies by running the following command in **the root of the repository** and in **dev_wgui** folder:
 ```
 yarn
