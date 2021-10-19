@@ -107,6 +107,7 @@ export default {
     },
     mounted() {
         this.fetchShortcuts();
+        fwgui.on('keyBindsChange', this.fetchShortcuts);
     }
 }
 </script>

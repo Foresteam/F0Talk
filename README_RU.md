@@ -7,7 +7,7 @@
 * Linux 5.11.10-1-MANJARO x64
 
 ## Установка
-Скачайте дистрибутив из секции "releases". Установите Google Chrome.
+Скачайте дистрибутив из секции "releases". Установите Chromium.
 
 #### Windows:
 1. Установить MS Visual C++ Redist'ы из папки **msvcr**.

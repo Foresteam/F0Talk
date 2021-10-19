@@ -7,7 +7,7 @@ Tested on:
 * Linux 5.11.10-1-MANJARO x64
 
 ## Installation
-Download distribution from "releases" section. Install Google Chrome.
+Download distribution from "releases" section. Install Chromium.
 
 #### Windows:
 1. Install MS Visual C++ Redists from **msvcr** folder.

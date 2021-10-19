@@ -80,13 +80,23 @@ export default {
             this.command = this.shortcuts[shortcut];
             window.scroll({ top: 0, left: 0, behavior: 'smooth' });
         },
-        async fetchShortcuts() {
-            let tshortcuts = (await fwgui.runCmd('binds')).map(v => v.split(' => '));
-            for (let v of tshortcuts) {
-                let [name, ...other] = v;
-                this.shortcuts[name] = other.join(' => ');
+        async setShortcuts(_shortcuts) {
+            let names = Object.keys(this.shortcuts) || [];
+            for (let [name, value] of Object.entries(_shortcuts)) {
+                this.shortcuts[name] = value;
+                let i;
+                if (i = names.indexOf(name))
+                    names.splice(i, 1);
             }
+            for (let name of names)
+                delete this.$delete(this.shortcuts, name);
             this.$forceUpdate();
+        },
+        async fetchShortcuts() {
+            let tshortcuts = (await fwgui.runCmd('binds'))
+                .map(v => v.split(' => '))
+                .filter(([name, ...other]) => [name, other.join(' => ')]);
+            this.setShortcuts(Object.fromEntries(tshortcuts));
         },
         runShortcut(bind) {
             fwgui.runCmd(bind);
@@ -99,6 +109,7 @@ export default {
     },
     mounted() {
         this.fetchShortcuts();
+        fwgui.on('shortcutsChange', this.setShortcuts);
     }
 }
 </script>

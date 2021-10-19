@@ -264,7 +264,7 @@ commands.push(new Command(
             return;
         shortcuts.self[args.shortcut] = args.cmd.join(' ');
         shortcuts.save();
-        if (doEmit)
+        // if (doEmit)
             fwgui.emit('shortcutsChange', shortcuts.self);
     }
 ));
@@ -277,7 +277,7 @@ commands.push(new Command(
             return;
         delete shortcuts.self[args.shortcut];
         shortcuts.save();
-        if (doEmit)
+        // if (doEmit)
             fwgui.emit('shortcutsChange', shortcuts.self);
     }
 ));
@@ -295,7 +295,7 @@ commands.push(new Command(
         let ctrlShift = (keys.includes('shift') << 1) + keys.includes('ctrl');
         keyBinds.self[ctrlShift][parseInt(keys[keys.length - 1])] = args.cmd.join(' ');
         keyBinds.save();
-        if (doEmit)
+        // if (doEmit)
             fwgui.emit('keyBindsChange', keyBinds.self);
     }
 ));
@@ -312,7 +312,7 @@ commands.push(new Command(
         let ctrlShift = (keys.includes('shift') << 1) + keys.includes('ctrl');
         delete keyBinds.self[ctrlShift][parseInt(keys[keys.length - 1])];
         keyBinds.save();
-        if (doEmit)
+        // if (doEmit)
             fwgui.emit('keyBindsChange', keyBinds.self);
     }
 ));

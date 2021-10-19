@@ -23,7 +23,7 @@ module.exports = {
     cfg_tv: ['Player temporal volume, %. Affects the next sound, overrides "v"', 'Временная громкость, %. Срабатывает единажды. Перекрывает "v"'],
     cfg_device: ['Audio output device', 'Устройство выхода звука'],
     cfg_device2: ['Additional audio output device', 'Дополнительное устройство выхода звука'],
-    cfg_chrome_path: ['Path to Google Chrome. Do not touch this, if the GUI works', 'Путь до Google Chrome. Не трогайте, если GUI работает'],
+    cfg_chrome_path: ['Path to Chromium. Do not touch this, if the GUI works', 'Путь до Chromium. Не трогать, если GUI работает'],
     cfg_async: ['The next sound will bypass the queue', 'Обход очереди проигрывания, один раз'],
     cfg_lang: ['Interface language. "false" for English, "true" for Russian', 'Язык интерфейса. "false" - для английского, а "true" - для русского'],
 
