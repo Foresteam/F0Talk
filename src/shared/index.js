@@ -166,8 +166,12 @@ const runCmd = async (raw, _console = true) => {
     }
     if (!_console)
         return output;
+    let outNotEmpty = output.reduce((prev, current) => prev + !!current, 0);
     for (let v of output)
-        v && console.log(v);
+        if (v)
+            console.log(v);
+    if (outNotEmpty)
+        process.stdout.write(FgCyan + '> ' + Reset);
 };
 
 const main = async (_GTTS, _sound, _fwgui, unload) => {
