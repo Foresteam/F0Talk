@@ -300,7 +300,13 @@ commands.push(new Command(
         keyBinds.self[ctrlShift][parseInt(keys[keys.length - 1])] = args.cmd.join(' ');
         keyBinds.save();
         // if (doEmit)
-            fwgui.emit('keyBindsChange', keyBinds.self);
+
+        let output = {};
+        let kz = ['', 'ctrl+', 'shift+', 'ctrl+shift+'];
+        for (let i in keyBinds.self)
+            for (let [k, v] of Object.entries(keyBinds.self[i]))
+                output[`${kz[i]}${k}`] = v;
+        fwgui.emit('keyBindsChange', output);
     }
 ));
 commands.push(new Command(
@@ -316,8 +322,13 @@ commands.push(new Command(
         let ctrlShift = (keys.includes('shift') << 1) + keys.includes('ctrl');
         delete keyBinds.self[ctrlShift][parseInt(keys[keys.length - 1])];
         keyBinds.save();
-        // if (doEmit)
-            fwgui.emit('keyBindsChange', keyBinds.self);
+        
+        let output = {};
+        let kz = ['', 'ctrl+', 'shift+', 'ctrl+shift+'];
+        for (let i in keyBinds.self)
+            for (let [k, v] of Object.entries(keyBinds.self[i]))
+                output[`${kz[i]}${k}`] = v;
+        fwgui.emit('keyBindsChange', output);
     }
 ));
 commands.push(new Command(

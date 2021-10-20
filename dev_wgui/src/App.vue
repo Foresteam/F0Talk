@@ -32,8 +32,9 @@
 		<v-main>
 			<v-tabs-items v-model="tab" ref="tabs"><!-- style="background: none" -->
 				<v-tab-item><MainSettings :help="help" :lang="lang" @langChange="langChange" :locales="locales"/></v-tab-item>
-				<v-tab-item><Shortcuts :locales="locales" :lang="lang"/></v-tab-item>
-				<v-tab-item><Hotkeys :locales="locales" :lang="lang"/></v-tab-item>
+				<v-tab-item><Shortcuts :locales="locales" :lang="lang" :isHotkeys="false"/></v-tab-item>
+				<v-tab-item><Shortcuts :locales="locales" :lang="lang" :isHotkeys="true"/></v-tab-item>
+				<!-- <v-tab-item><Hotkeys :locales="locales" :lang="lang"/></v-tab-item> -->
 				<v-tab-item><About :help="help" :locales="locales" :lang="lang" /></v-tab-item>
 			</v-tabs-items>
 		</v-main>
@@ -43,7 +44,7 @@
 <script>
 import MainSettings from './components/MainSettings';
 import Shortcuts from './components/Shortcuts';
-import Hotkeys from './components/Hotkeys';
+// import Hotkeys from './components/Hotkeys';
 import About from './components/About';
 
 export default {
@@ -51,7 +52,7 @@ export default {
 	components: {
 		MainSettings,
 		Shortcuts,
-		Hotkeys,
+		// Hotkeys,
 		About
 	},
 	data: () => ({
