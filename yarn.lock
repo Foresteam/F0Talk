@@ -587,6 +587,15 @@ function-bind@^1.1.1:
   resolved "https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz"
   integrity sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==
 
+fwgui@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/fwgui/-/fwgui-1.1.0.tgz#7fb39c379da55122f59617875ab4a0d3ed6bfe15"
+  integrity sha512-FKI9EsNupKwNo/GmoXWu9L1L6zDJI2cgTxoiBf4NpUqrP1LmnvO+JZ7TUqDTRiMMmHdALIPhRCAMoZqNRwN08g==
+  dependencies:
+    chrome-launcher "^0.13.4"
+    express "^4.17.1"
+    express-ws "^4.0.0"
+
 get-caller-file@^1.0.1:
   version "1.0.3"
   resolved "https://registry.npmjs.org/get-caller-file/-/get-caller-file-1.0.3.tgz"
